@@ -1,1 +1,5 @@
-sudo chmod +x websetup.sh
+      
+     sudo chmod +x websetup.sh
+
+
+      ./websetup.sh
