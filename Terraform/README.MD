@@ -1,11 +1,11 @@
 # TERRAFORM
 
-Terraform is an open-source infrastructure as code (IAC) tool that allows developers to manage their infrastructure through code. With Terraform, developers can create, manage, and modify infrastructure resources across multiple cloud providers, such as AWS, GCP, and Azure. In this article, we'll take a look at the basic syntax of Terraform and some common use cases.
+Terraform is an open-source infrastructure as code (IAC) tool by Hashicorp that allows developers to manage their infrastructure through code. With Terraform, we can create, manage, and modify infrastructure resources across multiple cloud providers, such as AWS, GCP, and Azure. In this article, we'll take a look at the basic syntax of Terraform and some common use cases.
 
 ### Installing Terraform on Linux
 - Download the latest version of Terraform from the official website: https://www.terraform.io/downloads.html
 
-- Extract the downloaded zip file to a directory of your choice:
+- Extract the downloaded zip file to a directory
 
 ```sh
 unzip terraform.zip -d /usr/local/bin/
@@ -16,7 +16,7 @@ unzip terraform.zip -d /usr/local/bin/
 terraform --version
 ```
 ### Basic Terraform Commands
-Some basic Terraform commands that you can use to manage your infrastructure:
+Some basic Terraform commands that we can use to manage a infrastructure:
 
 `terraform init` : Initializes a new or existing Terraform working directory. This command downloads the required provider plugins and sets up the backend.
 
@@ -37,7 +37,7 @@ Terraform uses a declarative syntax to define infrastructure resources. Instead 
 The basic syntax of Terraform consists of three main components:
 
 #### Providers
-Providers are plugins that Terraform uses to interact with various cloud providers. For example, the AWS provider allows Terraform to interact with AWS resources. To use a provider, you must define it in your Terraform configuration file.
+Providers are plugins that Terraform uses to interact with various cloud providers. For example, the AWS provider allows Terraform to interact with AWS resources. To use a provider, we must define it in our Terraform configuration file.
 
 ```tf
 provider "aws" {
@@ -48,7 +48,7 @@ provider "aws" {
 This example configures the AWS provider to use the us-west-2 region.
 
 #### Resources
-Resources are the infrastructure objects that you want to create or manage. Resources are defined in Terraform configuration files using the following syntax:
+Resources are the infrastructure objects that we want to create or manage. Resources are defined in Terraform configuration files using the following syntax:
 
 ```tf
 resource "resource_type" "resource_name" {
@@ -56,7 +56,7 @@ resource "resource_type" "resource_name" {
 }
 ```
 
-For example, to create an EC2 instance in AWS, you can define the following resource:
+For example, to create an EC2 instance in AWS, we can define the following resource:
 
 ```tf
 
@@ -68,14 +68,14 @@ resource "aws_instance" "example" {
 
 #### Variables
 
-Variables are used to parameterize your Terraform configuration files. They allow you to define values that can be passed into your Terraform scripts at runtime. You can define variables in Terraform using the following syntax:
+Variables are used to parameterize a Terraform configuration files. They allow us to define values that can be passed into the Terraform scripts at runtime. We can define variables in Terraform using the following syntax:
 
 ```tf
 variable "variable_name" {
   # Variable arguments
 }
 ```
-For example, to define a variable that represents an AWS region, you can define the following variable:
+For example, to define a variable that represents an AWS region, we can define the following variable:
 
 ```tf
 
@@ -83,7 +83,7 @@ variable "region" {
   default = "us-west-2"
 }
 ```
-You can then use this variable in your resource definitions, like this:
+We can then use this variable in our resource definitions, like this:
 
 ```tf
 
@@ -93,8 +93,8 @@ resource "aws_instance" "example" {
   region        = var.region
 }
 ```
-Here you can find in [main.tf](./main.tf) a basic terraform code which task is to,
-- Develop a Terraform module that sets up an Amazon VPC - devops4 with public and private subnets and an Internet Gateway for Internet access.
+Here is [main.tf](./main.tf) a terraform code which task is to do,
+- Develop a Terraform module that sets up an Amazon VPC with public and private subnets and an Internet Gateway for Internet access.
 - Build a Terraform module that sets up an Amazon Elastic Load Balancer and associated Auto Scaling Group for high availability.
 
 ### Use Cases
