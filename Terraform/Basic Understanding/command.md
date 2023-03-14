@@ -7,6 +7,9 @@
 terraform validate
 ```
 
+> NOTE: The terraform apply failed in spite of our validation working! This is because the validate command only carries out a general verification of the configuration. It validated the resource block and the argument syntax but not the values the arguments expect for a specific resource!
+
+
 - formating terraform code
 
 ```sh
@@ -53,7 +56,7 @@ terraform plan
 ```sh
 terraform graph
 ```
-### tips: to get visual represent of graph using any graph visualising software (in ubuntu for example)
+> tips: to get visual represent of graph using any graph visualising software (in ubuntu for example)
 ![image](https://user-images.githubusercontent.com/39403552/224932979-283d6a47-8ad4-4291-9dc0-7d5669327802.png)
 
 
