@@ -137,4 +137,8 @@ dallas_nodes
       with_items: '{{ packages }}'
 
 ```
+ ## Roles
  
+ ```sh 
+  ansible-galaxy init mysql
+ ```
