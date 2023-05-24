@@ -1,0 +1,15 @@
+target00 ansible_host=127.0.0.1 ansible_port=2222 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant becomes=true
+target01 ansible_host=127.0.0.1 ansible_port=2200 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant becomes=true
+target02 ansible_host=127.0.0.1 ansible_port=2201 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant becomes=true
+
+[all_servers]
+target00
+target01
+target02
+
+[web_servers]
+target00
+target01
+
+[db_server]
+target02
