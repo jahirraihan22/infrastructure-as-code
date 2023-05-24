@@ -1,23 +1,44 @@
 # @format
 ---
-- name: Setup WebServer in Target 0
-  hosts: web_servers
+- name: Setup WebServer (nginx) in Target machine
+  hosts: "{{ host_name }}"
   become: true
   tasks:
-    # - name: Install Apache httpd
+    - name: Install Apache nginx
+      yum:
+        name: nginx
+        state: present
+    # - name: Removing Apache httpd
     #   yum:
     #     name: httpd
-    #     state: present
-    - name: Removing Apache httpd
-      yum:
-        name: httpd
-        state: absent
-    # - name: Start and Enabling HTTPD
-    #   service:
-    #     name: httpd
-    #     state: started
-    #     enabled: yes
+    #     state: absent
+    - name: Start and Enabling nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
     # - name: Uploading File to server
     #   copy:
     #     src: index.html
     #     dest: /var/www/html/index.html
+# - name: Setup WebServer (httpd) in Target machine
+#   hosts: "{{ host_name }}"
+#   become: true
+#   tasks:
+#     - name: Install Apache httpd
+#       yum:
+#         name: httpd
+#         state: present
+#     # - name: Removing Apache httpd
+#     #   yum:
+#     #     name: httpd
+#     #     state: absent
+#     - name: Start and Enabling HTTPD
+#       service:
+#         name: httpd
+#         state: started
+#         enabled: yes
+#     - name: Uploading File to server
+#       copy:
+#         src: index.html
+#         dest: /var/www/html/index.html
