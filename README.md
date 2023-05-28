@@ -1,3 +1,11 @@
-# infrastructure-as-code
+<!-- @format -->
 
-Infrastructure as Code (IaC) is the management of infrastructure (networks, virtual machines, load balancers, and connection topology) in a descriptive model, using the same versioning as DevOps team uses for source code. Like the principle that the same source code generates the same binary, an IaC model generates the same environment every time it is applied.
+# Setup a two multi tier application using Ansible and Vagrant
+
+### Features
+
+- A control node
+- Two slave node one for application and one for database
+- Vagrant for provisioning VM
+- Application pull from remote repository
+- SSH based login instead of password in ansible
