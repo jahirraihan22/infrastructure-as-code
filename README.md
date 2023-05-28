@@ -2,7 +2,7 @@
 
 # Setup a two multi tier application using Ansible and Vagrant
 
-### Features
+## Features
 
 - A control node
 - Two slave node one for application and one for database
