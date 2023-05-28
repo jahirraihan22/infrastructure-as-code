@@ -4,7 +4,7 @@
 
 ## Features
 
-- A control node
+- One control node
 - Two slave node one for application and one for database
 - Vagrant for provisioning VM
 - Application pull from remote repository

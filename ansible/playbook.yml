@@ -1,0 +1,7 @@
+# @format
+
+- name: Setting up basic configuration
+  hosts: all
+  tasks:
+    - name: "Update package manager"
+      yum: update
