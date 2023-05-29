@@ -1,0 +1,7 @@
+# @format
+
+vars:
+  php_version: "8.1"
+  app_repo: "https://github.com/jahirraihan22/laravel-dockerized.git"
+  environment_file: "/path/to/your/environment-file.env"
+  nginx_config: "/path/to/your/nginx-config.conf"

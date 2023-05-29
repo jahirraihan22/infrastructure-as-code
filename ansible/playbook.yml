@@ -1,7 +1,135 @@
 # @format
-
-- name: Setting up basic configuration
-  hosts: all
+---
+- name: Set up Laravel app environment
+  hosts: target-app-server
+  become: true
   tasks:
-    - name: "Update package manager"
-      yum: update
+    - name: Update apt cache
+      become: true
+      apt:
+        update_cache: yes
+
+    - name: Install software properties common
+      become: true
+      apt:
+        name: software-properties-common
+        state: present
+
+    - name: Add repository
+      shell:
+        cmd: |
+          add-apt-repository ppa:ondrej/php && apt-get update
+
+    - name: Install PHP
+      become: true
+      apt:
+        name:
+          - php8.1
+        state: present
+
+    - name: Install required packages
+      become: true
+      apt:
+        name:
+          - php8.1-cli
+          - php8.1-fpm
+          - php8.1-mbstring
+          - php8.1-xml
+          - php8.1-zip
+          - php8.1-mysql
+          - php8.1-curl
+          - php8.1-gd
+          # - php-imagick
+          - unzip
+          - git
+          - nginx
+          # - mysql-server
+          # - composer # Install Composer package
+        state: present
+
+    - name: Enable PHP FPM service
+      become: true
+      service:
+        name: php8.1-fpm
+        state: started
+        enabled: yes
+
+    - name: Clone Laravel app repository
+      become: true
+      git:
+        repo: https://github.com/jahirraihan22/laravel-dockerized.git
+        dest: /var/www/laravel_app
+        version: master
+
+    - name: Validate Composer checksum
+      get_url:
+        checksum: "sha384:795f976fe0ebd8b75f26a6dd68f78fd3453ce79f32ecb33e7fd087d39bfeb978342fb73ac986cd4f54edd0dc902601dc"
+        dest: /usr/src/
+        url: https://getcomposer.org/installer
+      become: true
+
+    - name: Download and install Composer
+      shell: curl -sS https://getcomposer.org/installer | php
+      args:
+        chdir: /usr/src/
+        creates: /usr/local/bin/composer
+        warn: false
+      become: true
+
+    - name: Add Composer to global path
+      copy:
+        dest: /usr/local/bin/composer
+        group: root
+        mode: "0755"
+        owner: root
+        src: /usr/src/composer.phar
+        remote_src: yes
+      become: true
+
+    - name: Install Laravel app dependencies
+      become: true
+      shell:
+        cmd: |
+          cd /var/www/laravel_app
+          composer install --no-interaction --prefer-dist
+
+    - name: Set Laravel app environment file
+      become: true
+      template:
+        src: ../app/.env
+        dest: /var/www/laravel_app/.env
+
+    - name: Set Laravel app key
+      become: true
+      shell:
+        cmd: php /var/www/laravel_app/artisan key:generate
+
+    - name: Configure Nginx for Laravel app
+      become: true
+      template:
+        src: ../app/nginx-config.conf
+        dest: /etc/nginx/sites-available/laravel_app.conf
+
+    - name: Enable Nginx site
+      become: true
+      file:
+        src: /etc/nginx/sites-available/laravel_app.conf
+        dest: /etc/nginx/sites-enabled/laravel_app.conf
+        state: link
+
+    - name: Disable default Nginx site
+      become: true
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+
+    - name: Restart Nginx service
+      become: true
+      service:
+        name: nginx
+        state: restarted
+
+    - name: Run Laravel database migrations
+      become: true
+      shell:
+        cmd: php /var/www/laravel_app/artisan migrate --force

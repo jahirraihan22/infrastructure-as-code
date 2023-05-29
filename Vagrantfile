@@ -1,4 +1,4 @@
-IMAGE_NAME = "geerlingguy/centos7"
+IMAGE_NAME = "ubuntu/jammy64"
 VMs = ["target-app-server","target-db-server"]
 NODE_CPU = 1 
 NODE_MEM = 512
