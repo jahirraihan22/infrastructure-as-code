@@ -1,4 +1,4 @@
-#! bin/bash
+#!/bin/bash
 
 # guard clause is the technique to check critical statement to prevent interrupt code
 
