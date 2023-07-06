@@ -1,8 +1,0 @@
-1  sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
-    2  sudo mysql
-    3  sudo apt install phpmyadmin
-    4  sudo phpenmod mbstring
-    5  sudo systemctl restart apache2
-    6  sudo mysql
-    7  clear
-    8  history > /opt/history.txt
