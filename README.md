@@ -27,6 +27,7 @@ The container runtime has already been installed on both nodes, so you may skip 
 Install kubeadm, kubectl and kubelet on all nodes:
 
 ``` sh
+{
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl
 
@@ -41,6 +42,8 @@ sudo apt-get update
 sudo apt-get install -y kubelet=1.27.0-00 kubeadm=1.27.0-00 kubectl=1.27.0-00
 
 sudo apt-mark hold kubelet kubeadm kubectl
+
+}
 
 ```
 =========================================
@@ -143,9 +146,11 @@ kubeadm join [192.29.49.3:6443](http://192.29.49.3:6443/) --token s9akv5.dczuex6
 Once the command has been run successfully, set up the kubeconfig:
 
 ```sh
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
+{
+ mkdir -p $HOME/.kube
+ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+}
 ```
 ================================================
 
