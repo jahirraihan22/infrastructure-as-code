@@ -57,8 +57,7 @@ IP_ADDR=$(ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
 ```
 
 ```sh
-kubeadm init --apiserver-cert-extra-sans=controlplane --apiserver-advertise-address $IP_ADDR --pod-network-cidr=[10.244.0.0/16](http://10.244.0.0/16)
-
+kubeadm init --apiserver-cert-extra-sans=controlplane --apiserver-advertise-address $IP_ADDR --pod-network-cidr=10.244.0.0/16
 ```
 Once you run the init command, you should see an output similar to below:
 ```log
