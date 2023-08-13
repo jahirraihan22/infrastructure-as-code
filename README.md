@@ -234,7 +234,7 @@ Locate the args section within the kube-flannel container definition. It should 
   - --kube-subnet-mgr
 ```
 
-Add the additional argument - --iface=eth0 to the existing list of arguments.
+Add the additional argument `- --iface=eth0` to the existing list of arguments.
 
 Now apply the modified manifest kube-flannel.yml file using kubectl:
 
