@@ -33,12 +33,12 @@ if [[ -z "$NODE_TYPE" ]];then
     exit 1
 fi
 
-if [[ $NODE_TYPE == "master" ]];then
-    if [[ -z "$IP_ADDRESS" ]];then
-        echo "IP_ADDRESS is required.....exiting"
-        exit 1
-    fi
+
+if [[ -z "$IP_ADDRESS" ]];then
+    echo "IP_ADDRESS is required.....exiting"
+    exit 1
 fi
+
 
 echo -e "Initializing Node $(hostname) \n================================================\n "
 
