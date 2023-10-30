@@ -1,18 +1,25 @@
 #! /bin/bash
 
-
-sudo cp "/vagrant/promtail-linux-amd64" /usr/local/bin
+source .env
+echo -e "Installing dependency\n========================\n"
+sudo apt install curl unzip -y
+echo -e "\n========================\n"
 
 sudo useradd --no-create-home --shell /bin/false promtail
 # make promtail as sudoer
 echo "promtail  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/promtail
+
+curl -O -L "https://github.com/grafana/loki/releases/download/v${PROMTAIL_VERSION}/promtail-linux-amd64.zip"
+unzip promtail-linux-amd64.zip
+sudo cp promtail-linux-amd64 /usr/local/bin
+sudo chown promtail:promtail /usr/local/bin/promtail-linux-amd64
 
 sudo mkdir -p /etc/promtail
 
 sudo chown promtail:promtail /usr/local/bin/promtail-linux-amd64
 
 sudo chown -R promtail:promtail /etc/promtail/
-sudo cp /vagrant/promtail-local-config.yaml /etc/promtail/
+sudo cp ${PROMTAIL_CONFIG_PATH} /etc/promtail/
 
 sudo chown promtail:promtail /etc/promtail/promtail-local-config.yaml
 sudo touch /etc/systemd/system/promtail.service

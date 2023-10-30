@@ -1,6 +1,8 @@
 #! /bin/bash
-
-sudo cp "/vagrant/node_exporter-1.6.1.linux-amd64/node_exporter" /usr/local/bin
+source .env
+curl -O -L "https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORT_VERSION}/node_exporter-${NODE_EXPORT_VERSION}.linux-amd64.tar.gz"
+tar xvf node_exporter-${NODE_EXPORT_VERSION}.linux-amd64.tar.gz 
+mv node_exporter-${NODE_EXPORT_VERSION}.linux-amd64/node_exporter /usr/local/bin/
 
 sudo useradd --no-create-home --shell /bin/false node_exporter
 
@@ -21,9 +23,6 @@ WantedBy=multi-user.target
 EOF
 
 sudo systemctl daemon-reload
-
 sudo systemctl start node_exporter
-
 sudo systemctl enable node_exporter
-
 sudo systemctl status node_exporter
